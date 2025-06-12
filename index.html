@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capturar o Subir Foto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <h1>Capturar o Subir Foto</h1>
+            <p class="subtitle">Toma una foto clara y bien iluminada para análisis de IA</p>
+            
+            <div class="content-wrapper">
+                <div class="photo-section">
+                    <!-- Botón para tomar foto -->
+                    <button id="takePhotoBtn" class="photo-btn take-photo-btn">
+                        <svg class="camera-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 15.5C13.933 15.5 15.5 13.933 15.5 12S13.933 8.5 12 8.5S8.5 10.067 8.5 12S10.067 15.5 12 15.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M3 16.5V9C3 8.17157 3.67157 7.5 4.5 7.5H6.75L8.25 5.5H15.75L17.25 7.5H19.5C20.3284 7.5 21 8.17157 21 9V16.5C21 17.3284 20.3284 18 19.5 18H4.5C3.67157 18 3 17.3284 3 16.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Tomar Foto
+                    </button>
+                    
+                    <!-- Botón para subir foto -->
+                    <button id="uploadPhotoBtn" class="photo-btn upload-photo-btn">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 10L12 5L17 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 5V15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20 20H4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Subir Foto
+                    </button>
+                    
+                    <!-- Input file oculto -->
+                    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" style="display: none;">
+                    
+                    <!-- Vista previa de la imagen -->
+                    <div id="imagePreview" class="image-preview" style="display: none;">
+                        <div class="preview-header">
+                            <h4>Vista Previa</h4>
+                            <button id="clearPreview" class="clear-btn">&times;</button>
+                        </div>
+                        <img id="previewImage" src="" alt="Vista previa de la imagen">
+                        <div class="preview-info">
+                            <span id="imageInfo"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="guidelines-section">
+                    <h3>Guías para la Foto:</h3>
+                    <ul class="guidelines-list">
+                        <li class="guideline-item">
+                            <span class="checkmark">✓</span>
+                            Use formato JPEG, PNG, o WebP
+                        </li>
+                        <li class="guideline-item">
+                            <span class="checkmark">✓</span>
+                            Asegure buenas condiciones de iluminación
+                        </li>
+                        <li class="guideline-item">
+                            <span class="checkmark">✓</span>
+                            Mantenga la imagen enfocada y clara
+                        </li>
+                        <li class="guideline-item">
+                            <span class="checkmark">✓</span>
+                            El tamaño del archivo debe ser menor a 1MB
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal para la cámara -->
+        <div id="cameraModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Tomar Foto</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="camera-container">
+                    <video id="cameraPreview" autoplay playsinline></video>
+                    <canvas id="captureCanvas" style="display: none;"></canvas>
+                </div>
+                <div class="camera-controls">
+                    <button id="captureBtn" class="capture-btn">Capturar</button>
+                    <button id="closeCameraBtn" class="close-btn">Cerrar</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Area de notificaciones -->
+        <div id="notification" class="notification"></div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html> 
